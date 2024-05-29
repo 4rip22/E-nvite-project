@@ -17,7 +17,7 @@
 
 <body class="h-screen flex">
     <!-- sidebar -->
-    <div class="bg-blue-950 text-white h-screen pt-5 w-64 relative z-20 transition-all duration-300 ease-in-out"
+    <div class="bg-blue-950  text-white h-screen pt-5 w-64 relative z-20 transition-all duration-300 ease-in-out"
         id="sidebar">
         <div class="flex items-center justify-center bg-slate-100 p-3 rounded-full mx-auto" id="logo-container"
             style="width: 5rem;">
