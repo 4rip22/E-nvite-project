@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login User</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/loginUser.css">
+</head>
+<body class="flex items-center justify-center h-screen">
+    <!-- Kontainer utama untuk form login -->
+    <div class="form-container bg-white p-8 rounded-lg shadow-md-lg w-full max-w-sm">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        <form action="" method="POST">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700">Username</label>
+                <input type="text" name="username" id="username" placeholder="Username" class="w-full px-3 py-2 border rounded-lg" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" class="w-full px-3 py-2 border rounded-lg" required>
+            </div>
+            <button type="submit" class="w-full bg-purple-800 text-white py-2 rounded-lg hover:bg-purple-600">Login</button>
+        </form>
+        <a class="block text-center mt-4 text-blue-5" href="#">SIGN UP ?</a>
+    </div>
+
+</body>
+</html>
