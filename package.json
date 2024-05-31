@@ -1,5 +1,20 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "bootstrap-icons": "^1.11.3"
+=======
+  "name": "e-nvite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+>>>>>>> d09dc92c64f54551198f25762372ba8c96576de8
   }
 }
