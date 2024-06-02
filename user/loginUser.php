@@ -11,7 +11,7 @@
     <!-- Kontainer utama untuk form login -->
     <div class="form-container bg-white p-8 rounded-lg shadow-md-lg w-full max-w-sm">
         <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form action="" method="POST">
+        <form action="set_login.php" method="POST">
             <div class="mb-4">
                 <label for="email" class="block text-gray-700">Email</label>
                 <div class="input-group">
@@ -32,8 +32,7 @@
             </div>
             <button type="submit" class="w-full bg-purple-800 text-bold text-white py-2 rounded-lg border border-transparent transition-all hover:bg-white hover:text-purple-800 hover:border-purple-800 hover:text-bold">Login</button>
         </form>
-        <a class="block text-center mt-4 text-blue-500 text-bold" href="../html/signUpUser.html">SIGN UP ?</a>
+        <a class="block text-center mt-4 text-blue-500 text-bold" href="../user/signUpUser.php">SIGN UP ?</a>
     </div>
-
 </body>
 </html>
