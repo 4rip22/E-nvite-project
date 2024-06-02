@@ -1,6 +1,7 @@
 <?php
-include "db/koneksi.php";
-session_start();
+include "../db/koneksi.php";
+include "../Admin/session-login/ceklogin.php";
+
 $sql = "SELECT * FROM user";
 $result = mysqli_query($conn, $sql);
 
@@ -14,14 +15,14 @@ $result = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../E-nvite/src/output.css">
-    <link rel="shortcut icon" href="img/admin.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../src/output.css">
+    <link rel="shortcut icon" href="../img/admin.ico" type="image/x-icon">
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css" rel="stylesheet">
 
     <title>Admin User Create</title>
 </head>
@@ -32,7 +33,7 @@ $result = mysqli_query($conn, $sql);
         id="sidebar">
         <div class="flex items-center justify-center bg-slate-100 p-3 rounded-full mx-auto" id="logo-container"
             style="width: 5rem;">
-            <img src="../E-nvite/img/logo.png" alt="Logo" class="w-full h-auto">
+            <img src="../img/logo.png" alt="Logo" class="w-full h-auto">
         </div>
         <span class="block text-center mt-2" id="logo-text">E-nvite</span>
         <div class="flex items-center justify-end px-7 mt-7 mb-5">
@@ -71,14 +72,13 @@ $result = mysqli_query($conn, $sql);
                 </a>
             </li>
             <li>
-                <a href="#"
+                <a href="#" onclick="confirmLogout()"
                     class="flex items-center py-2 px-4 mt-[15rem] transition duration-300 ease-in-out hover:bg-red-400 rounded">
                     <i class='bx bxs-log-out bx-sm'></i>
                     <span class="ml-2">Log Out </span>
                 </a>
             </li>
         </ul>
-
     </div>
 
     <style>
@@ -105,8 +105,6 @@ $result = mysqli_query($conn, $sql);
             color: white;
             font-family: "Gluten", "sans-serif";
             font-size: large;
-
-
         }
 
         #sidebar.w-20 #logo-text {
@@ -146,8 +144,7 @@ $result = mysqli_query($conn, $sql);
         <!-- Header -->
         <div class="bg-blue-900 text-white p-3 flex justify-end">
             <div class="mr-10 font-medium text-lg flex items-center justify-center">Admin
-                <span><img src="../E-nvite/img/admin.ico" alt="admin"
-                        class="w-12 ml-3 p-2 bg-slate-300 rounded-full"></span>
+                <span><img src="../img/admin.ico" alt="admin" class="w-12 ml-3 p-2 bg-slate-300 rounded-full"></span>
             </div>
         </div>
         <!-- Content -->
@@ -182,12 +179,18 @@ $result = mysqli_query($conn, $sql);
                     <div>
                         <label for="password" class="block text-gray-700 font-medium mb-2">Password<span
                                 class="text-red-500">*</span></label>
-                        <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[A-Z]).{8,}" required
-                            placeholder="Masukkan Password Anda"
-                            class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <p class="font-medium text-sm opacity-50">Password harus memiliki min. 8 huruf, 1 angka, 1 huruf
-                            kapital</p>
+                        <div class="relative flex flex-row-reverse">
+                            <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[A-Z]).{8,}"
+                                required placeholder="Masukkan Password Anda"
+                                class="relative w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10">
+                            <span class="absolute my-2 mx-4 text-lg ">
+                                <i class="far fa-eye cursor-pointer" id="togglePassword"></i>
+                            </span>
+                        </div>
+                        <p class="font-medium text-sm opacity-50">Password harus memiliki min. 8 karakter, 1 angka, 1
+                            huruf kapital</p>
                     </div>
+
                     <div class="text-center">
                         <button type="submit" name="submit"
                             class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Tambahkan</button>
@@ -203,8 +206,7 @@ $result = mysqli_query($conn, $sql);
         </div>
 
         <!-- modal -->
-        <?php
-        if (isset($_SESSION["berhasil_menambahkan_data"])): ?>
+        <?php if (isset($_SESSION["berhasil_menambahkan_data"])): ?>
             <div class="fixed inset-0 opacity-80 bg-black z-40"></div>
             <div class="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
                 <div class="max-w-lg mx-auto h-52 bg-white rounded-xl">
@@ -213,21 +215,65 @@ $result = mysqli_query($conn, $sql);
                         <i class='bx bx-check-square text-6xl'></i>
                         <a class="py-2 px-4 bg-blue-600 rounded text-white font-semibold" href="adminuser.php">Ok</a>
                     </div>
-
-
                     </a>
                 </div>
             </div>
+            <?php unset($_SESSION["berhasil_menambahkan_data"]); ?>
+        <?php endif; ?>
+    </div>
+
+    <!-- modal -->
+    <?php
+    if (isset($_SESSION["berhasil_update_data"])): ?>
+        <div class="fixed inset-0 opacity-80 bg-black z-40"></div>
+        <div class="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
+            <div class="max-w-lg mx-auto h-52 bg-white rounded-xl">
+                <h1 class="text-center font-bold text-3xl py-5">Data Berhasil Di Update</h1>
+                <div class="flex flex-col items-center text-green-700">
+                    <i class='bx bx-check-square text-6xl'></i>
+                    <a class="py-2 px-4 bg-blue-600 rounded-full text-white font-semibold" href="adminuser.php">Ok</a>
+                </div>
+                </a>
+            </div>
+        </div>
 
 
-            <?php
-            unset($_SESSION["berhasil_menambahkan_data"]);
-        endif; ?>
+        <?php
+        unset($_SESSION["berhasil_update_data"]);
+    endif; ?>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+    <script src="https://kit.fontawesome.com/e24f6244ee.js" crossorigin="anonymous"></script>
+    <script>
+        // Fungsi untuk menampilkan pesan konfirmasi saat logout
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Konfirmasi Keluar',
+                text: 'Apakah Anda yakin ingin keluar?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Keluar',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke halaman logout jika pengguna menekan "Logout"
+                    window.location.href = '../Admin/logoutadmin.php';
+                }
+            });
+        }
 
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
 
+            // Toggle the eye icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
-
-
 
 </html>

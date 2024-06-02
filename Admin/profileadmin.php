@@ -1,21 +1,20 @@
 <?php
+session_start();
 include "../db/koneksi.php";
-include "../Admin/session-login/ceklogin.php";
 
-// Query untuk mengambil total pengguna dari tabel "user"
-$query = "SELECT COUNT(*) AS total_user FROM user";
-$result = mysqli_query($conn, $query);
+$sql = "SELECT * FROM admin";
+$result = mysqli_query($conn, $sql);
 
-// Periksa apakah query berhasil dieksekusi
-if ($result) {
-    // Ambil hasil query
-    $row = mysqli_fetch_assoc($result);
-    $total_user = $row['total_user'];
+if (isset($_SESSION['ID'])) {
+    $admin_id = $_SESSION['ID'];
+    $admin_nama = $_SESSION['nama'];
+    $admin_email = $_SESSION['email'];
+    $admin_pass = $_SESSION['pw'];
+
 } else {
-    // Jika terjadi kesalahan, atur total user menjadi 0 atau tampilkan pesan kesalahan
-    $total_user = 0;
-    // Tampilkan pesan error jika diperlukan
-    // echo "Error: " . mysqli_error($conn);
+    // Redirect ke halaman login jika sesi tidak ditemukan
+    header("Location: loginadmin.php");
+    exit();
 }
 
 ?>
@@ -33,14 +32,14 @@ if ($result) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gluten:wght@100..900&display=swap" rel="stylesheet">
-    <link href="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css
-" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
 
 
-
-    <title>Admin Dashboard</title>
+    <title>Profil Admin</title>
 </head>
 
 <body class="h-screen flex">
@@ -185,100 +184,97 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css
                             Masukan
                         </a>
                     </div>
-
                 </span>
             </div>
         </div>
 
         <!-- Content -->
-        <div class="flex-col p-4 bg-white relative ">
-            <h1 class="text-xl font-semibold ml-7  ">Dashboard</h1>
+        <div class="flex justify-center items-center p-4 bg-white relative">
+            <h1 class="text-xl font-semibold ml-7">Profil Admin</h1>
             <div class="bottom-border"></div>
+            <style>
+                .bottom-border::after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.5);
+                }
+            </style>
         </div>
 
-        <!-- Cards -->
-        <div class="bg-gray-200 rounded-lg mx-auto mt-16 px-16 md:px-24 lg:px-28  py-16 md:py-6 lg:py-32 shadow-xl">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <!-- Card Total User -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h2 class="text-lg font-semibold mb-2 text-left">Total User</h2>
-                    <p class="text-xl font-bold"><?php echo $total_user; ?></p>
-                </div>
+        <!-- Profile Section -->
 
-                <!-- Card Total Pesanan -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h2 class="text-lg font-semibold mb-2 text-left">Total Pesanan</h2>
-                    <p class="text-xl font-bold">10</p>
-                </div>
+        <div class="flex flex-col items-center bg-slate-100 h-screen mx-5 my-5 rounded">
+            <img src="../img/admin.ico" alt="Admin" class=" w-52 h-52 rounded-full mt-5 mx-auto">
 
-                <!-- Card Total Template -->
-                <div class="bg-white p-8 rounded-lg shadow-lg">
-                    <h2 class="text-lg font-semibold mb-2 text-left">Total Template</h2>
-                    <p class="text-xl font-bold">10</p>
-                </div>
+            <div class="text-center block space-y-1">
+                <h2 class="text-2xl font-semibold my-7" style="font-family: 'Rock Salt';"><?= $admin_nama ?></h2>
+                <h1 class="font-bold text-xl">Account <span
+                        class="bg-green-600 rounded-lg px-2 text-white inline-flex items-center justify-center my-auto">
+                        Active</span></h1>
+                <p class="text-gray-600"><?= $admin_id ?></p>
+                <p class="text-gray-600"><?= $admin_email ?></p>
+                <p class="text-gray-600"><?= $admin_pass ?></p>
             </div>
+            <a href="ubahpw.php">
+                <button type="button"
+                    class="bg-blue-900 hover:bg-blue-950 transition duration-300 ease-in-out px-5 py-2 mt-4 rounded-xl flex justify-center items-center text-white font-semibold">Ubah
+                    Password?</button>
+            </a>
+
         </div>
+    </div>
+
+    <!-- Modal Ubah Password -->
 
 
 
-        <style>
-            .bottom-border::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 2px;
-                box-shadow: 0 7px 10px rgba(0, 0, 0, 0.5);
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+    <script>
+        // Fungsi untuk menampilkan atau menyembunyikan dropdown menu
+        const adminIcon = document.getElementById('adminIcon');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        adminIcon.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        // Fungsi untuk menutup dropdown menu ketika mengklik di luar area dropdown
+        window.addEventListener('click', function (event) {
+            if (!adminIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
             }
-        </style>
+        });
 
-
-
-        <script src="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js
-"></script>
-        <script>
-            // Fungsi untuk menampilkan pesan konfirmasi saat logout
-            function confirmLogout() {
-                Swal.fire({
-                    title: 'Konfirmasi Keluar',
-                    text: 'Apakah Anda yakin ingin keluar?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Keluar',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirect ke halaman logout jika pengguna menekan "Logout"
-                        window.location.href = '../Admin/logoutadmin.php';
-                    }
-                });
-            }
-        </script>
-
-        <script>
-            // Fungsi untuk menampilkan atau menyembunyikan dropdown menu
-            const adminIcon = document.getElementById('adminIcon');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-
-            adminIcon.addEventListener('click', () => {
-                dropdownMenu.classList.toggle('hidden');
-            });
-
-            // Fungsi untuk menutup dropdown menu ketika mengklik di luar area dropdown
-            window.addEventListener('click', function (event) {
-                if (!adminIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.classList.add('hidden');
+        // Fungsi untuk menampilkan pesan konfirmasi saat logout
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Konfirmasi Keluar',
+                text: 'Apakah Anda yakin ingin keluar?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Keluar',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke halaman logout jika pengguna menekan "Logout"
+                    window.location.href = '../Admin/logoutadmin.php';
                 }
             });
-        </script>
+        }
+    </script>
+
 
 
 </body>
-
-
 
 </html>
