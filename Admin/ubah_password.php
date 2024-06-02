@@ -1,11 +1,6 @@
 <?php
-
 session_start();
 include "../db/koneksi.php";
-
-
-$error_password_lama = '';
-$error_password_konfirmasi = '';
 
 if (isset($_POST['submit'])) {
     $admin_id = $_SESSION['ID']; // ID pengguna dari sesi
@@ -27,29 +22,21 @@ if (isset($_POST['submit'])) {
                 // Update password baru di database
                 $update_query = "UPDATE admin SET Password='$password_baru' WHERE ID='$admin_id'";
                 if (mysqli_query($conn, $update_query)) {
-                    echo "<script>
-                            Swal.fire({
-                              icon: 'success',
-                              title: 'Berhasil',
-                              text: 'Password berhasil diubah',
-                              confirmButtonText: 'OK'
-                            }).then((result) => {
-                              if (result.isConfirmed) {
-                                window.location.href = '../Admin/profileadmin.php';
-                              }
-                            });
-                          </script>";
+                    $_SESSION['success'] = true;
                 } else {
-                    echo "Gagal mengubah password.";
+                    $_SESSION['error'] = "Gagal mengubah password!";
                 }
             } else {
-                $error_password_konfirmasi = "Password tidak cocok.";
+                $_SESSION['error_password_konfirmasi'] = "Password tidak cocok!";
             }
         } else {
-            $error_password_lama = "Password lama anda salah.";
+            $_SESSION['error_password_lama'] = "Password lama anda salah!";
         }
     } else {
-        echo "Pengguna tidak ditemukan.";
+        $_SESSION['error'] = "Pengguna tidak ditemukan!";
     }
+
+    header("Location: ubahpw.php");
+    exit();
 }
 ?>

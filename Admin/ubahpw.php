@@ -1,7 +1,9 @@
 <?php
-include "../db/koneksi.php";
 
+session_start();
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -199,24 +201,29 @@ include "../db/koneksi.php";
             <form action="ubah_password.php" method="POST" class="relative z-10 bg-white py-3 px-3 rounded shadow-md">
                 <h1 class="text-center font-bold flex justify-center text-xl">Ubah Password</h1>
                 <div class="my-2 mx-4">
-                    <label for="passwordlama" class="text-base opacity-60 shadow-lg block">Password Lama<span
+                    <label for="passwordlama" class="text-base opacity-60 block">Password Lama<span
                             class="text-red-500">*</span></label>
                     <input type="password" name="passwordlama" placeholder="Masukkan Password lama anda" required
                         class="w-full py-2 px-4 focus:outline-none border-2 border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-500 mb-2">
-                    <?php if (isset($error_password_lama))
-                        echo "<p class='text-red-500'>$error_password_lama</p>"; ?>
+                    <?php if (isset($_SESSION['error_password_lama'])): ?>
+                        <p class="text-base text-red-500"><?= $_SESSION['error_password_lama'] ?></p>
+                        <?php unset($_SESSION['error_password_lama']); ?>
+                    <?php endif; ?>
+
                     <label for="passwordbaru" class="text-base opacity-60 block">Password Baru<span
                             class="text-red-500">*</span></label>
                     <input type="password" name="passwordbaru" placeholder="Masukkan Password baru anda" required
                         class="w-full py-2 px-4 focus:outline-none border-2 border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-500 mb-2">
+
                     <label for="konfirmasipassword" class="text-base opacity-60 block">Konfirmasi Password<span
                             class="text-red-500">*</span></label>
                     <input type="password" name="konfirmasipassword" placeholder="Konfirmasi Password baru anda"
                         required
                         class="w-full py-2 px-4 focus:outline-none border-2 border-gray-500 rounded-xl focus:ring-2 focus:ring-blue-500 mb-2">
-                    <?php if (isset($error_password_konfirmasi))
-                        echo "<p class='text-red-500'>$error_password_konfirmasi</p>"; ?>
-
+                    <?php if (isset($_SESSION['error_password_konfirmasi'])): ?>
+                        <p class="text-red-500 text-base"><?= $_SESSION['error_password_konfirmasi'] ?></p>
+                        <?php unset($_SESSION['error_password_konfirmasi']); ?>
+                    <?php endif; ?>
                 </div>
                 <div class="text-center mt-4 flex justify-end items-center">
                     <button type="submit" name="submit"
@@ -225,10 +232,38 @@ include "../db/koneksi.php";
                 </div>
             </form>
             <div class="absolute flex justify-center bottom-6 right-52 z-10"><a href="profileadmin.php"><button
-                        type="submit"
-                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">Batal</button>
-                </a> </div>
+                        type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">Batal</button></a>
+            </div>
         </div>
+
+        <?php if (isset($_SESSION['success'])): ?>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil',
+                    text: 'Password Anda berhasil diubah',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '../Admin/profileadmin.php';
+                    }
+                });
+            </script>
+            <?php unset($_SESSION['success']); ?>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['error'])): ?>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: '<?= $_SESSION['error'] ?>',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
 
         <!-- style ngambang -->
         <style>
@@ -292,6 +327,7 @@ include "../db/koneksi.php";
             });
         }
     </script>
+
 
 
 
