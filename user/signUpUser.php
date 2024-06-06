@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../css/loginUser.css">
 </head>
 <body class="flex items-center justify-center h-screen">
-    <!-- Kontainer utama untuk form login -->
     <div class="form-container bg-white p-8 rounded-lg shadow-md-lg w-full max-w-sm">
         <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         <form action="register.php" method="POST">

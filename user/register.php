@@ -1,19 +1,24 @@
 <?php
-include "../db/controller.php";
+include '../db/controller.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $Nama = $_POST['nama']; 
+    $Nama = $_POST['nama'];
     $Email = $_POST['email'];
-    $Password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+    $Password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $Nomor = $_POST['nomor'];
 
-    $sql = "INSERT INTO user (Nama, Email, Password, Nomor) VALUES ('$Nama', '$Email', '$Password', '$Nomor')";
+    $sql = "INSERT INTO user (nama, email, password, nomor) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $Nama, $Email, $Password, $Nomor);
 
-    if (mysqli_query($conn, $sql)) {
-        header('Location: ../user/loginUser.php');
-        exit();
+    if ($stmt->execute()) {
+        header("Location: loginUser.php");
+        
     } else {
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
