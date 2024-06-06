@@ -1,6 +1,7 @@
 <?php
 
-include "db/koneksi.php";
+include "../db/koneksi.php";
+include "../Admin/session-login/ceklogin.php";
 
 $id = $_GET["id"];
 $sql = "DELETE FROM user WHERE id='$id'";

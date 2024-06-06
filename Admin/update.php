@@ -1,8 +1,9 @@
 <?php
 session_start();
-include "db/koneksi.php";
+include "../db/koneksi.php";
 
-var_dump($_POST);
+
+// var_dump($_POST);
 
 if (isset($_POST["submit"])) {
 
@@ -16,9 +17,9 @@ if (isset($_POST["submit"])) {
 
     if ($result) {
         $_SESSION["berhasil_update_data"] = true;
-        header("Location: edit.php");
+        header("Location: adminusercreate.php");
     } else {
-        header("Location: edit.php");
+        header("Location: adminusercreate.php");
     }
 }
 

@@ -1,6 +1,8 @@
 <?php
-session_start();
-include "db/koneksi.php";
+
+include "../db/koneksi.php";
+include "../Admin/session-login/ceklogin.php";
+
 
 if (isset($_POST["submit"])) {
     $nama = htmlspecialchars($_POST["nama"]);

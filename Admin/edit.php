@@ -1,9 +1,10 @@
 <?php
-session_start();
-include "db/koneksi.php";
+
+include "../db/koneksi.php";
+include "../Admin/session-login/ceklogin.php";
 
 $id = $_GET["id"];
-$query = "SELECT * FROM user WHERE id='$id'";
+$query = "SELECT * FROM user WHERE ID='$id'";
 $data = mysqli_query($conn, $query);
 ?>
 
@@ -14,8 +15,8 @@ $data = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Data</title>
-    <link rel="shortcut icon" href="img/admin.ico" type="image/x-icon">
-    <link rel="stylesheet" href="src/output.css">
+    <link rel="shortcut icon" href="../img/admin.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../src/output.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -62,25 +63,7 @@ $data = mysqli_query($conn, $query);
 
     </div>
 
-    <!-- modal -->
-    <?php
-    if (isset($_SESSION["berhasil_update_data"])): ?>
-        <div class="fixed inset-0 opacity-80 bg-black z-40"></div>
-        <div class="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
-            <div class="max-w-lg mx-auto h-52 bg-white rounded-xl">
-                <h1 class="text-center font-bold text-3xl py-5">Data Berhasil Di Update</h1>
-                <div class="flex flex-col items-center text-green-700">
-                    <i class='bx bx-check-square text-6xl'></i>
-                    <a class="py-2 px-4 bg-blue-600 rounded-full text-white font-semibold" href="adminuser.php">Ok</a>
-                </div>
-                </a>
-            </div>
-        </div>
 
-
-        <?php
-        unset($_SESSION["berhasil_update_data"]);
-    endif; ?>
 </body>
 
 </html>
