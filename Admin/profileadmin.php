@@ -228,14 +228,6 @@ if (isset($_SESSION['ID'])) {
         </div>
     </div>
 
-    <!-- Modal Ubah Password -->
-
-
-
-
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
     <script>
         // Fungsi untuk menampilkan atau menyembunyikan dropdown menu
@@ -272,9 +264,5 @@ if (isset($_SESSION['ID'])) {
             });
         }
     </script>
-
-
-
 </body>
-
 </html>

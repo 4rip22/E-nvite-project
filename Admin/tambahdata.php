@@ -3,7 +3,6 @@
 include "../db/koneksi.php";
 include "../Admin/session-login/ceklogin.php";
 
-
 if (isset($_POST["submit"])) {
     $nama = htmlspecialchars($_POST["nama"]);
     $email = htmlspecialchars($_POST["email"]);
@@ -21,6 +20,4 @@ if (isset($_POST["submit"])) {
         header("Location: adminusercreate.php?failed=Gagal");
     }
 }
-
-
 ?>

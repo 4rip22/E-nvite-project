@@ -374,7 +374,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js
         </script>
 
         <script>
-            // Fungsi untuk menampilkan atau menyembunyikan dropdown menu
+            //Fungsi untuk menampilkan atau menyembunyikan dropdown menu
             const adminIcon = document.getElementById('adminIcon');
             const dropdownMenu = document.getElementById('dropdownMenu');
 
@@ -382,7 +382,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js
                 dropdownMenu.classList.toggle('hidden');
             });
 
-            // Fungsi untuk menutup dropdown menu ketika mengklik di luar area dropdown
+            //Fungsi untuk menutup dropdown menu ketika mengklik di luar area dropdown
             window.addEventListener('click', function (event) {
                 if (!adminIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
                     dropdownMenu.classList.add('hidden');
