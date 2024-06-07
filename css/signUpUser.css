@@ -4,7 +4,6 @@ body {
     padding: 0;
     overflow: hidden;
 }
-
 body::before {
     content: '';
     position: fixed;
@@ -12,7 +11,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(../image/backgroundlogin.jpg);
+    background-image: url(../user/backgroundlogin.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     filter: blur(3px);
@@ -40,6 +39,7 @@ body::before {
     left: 0.75rem;
     pointer-events: none;
 }
+
 .custom-input::placeholder {
 text-indent: 2px;
 }
