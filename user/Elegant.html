@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
+    <title>E-nvite</title>
+    <style>
+        body {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #f7fafc;
+            border-right: 1px solid #e2e8f0;
+            height: 100vh;
+            position: fixed;
+            top: 1rem;
+            left: 0;
+            padding-top: 60px;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 1rem;
+            padding-top: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="text-gray-700 body-font fixed top-0 left-0 w-full z-10 border-b border-gray-200" style="background-color: white;">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <div class="flex items-center">
+                <img src="../img/logo.png" alt="E-nvite" class="h-8 mr-4">
+                <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="#">
+                    <span class="ml-3 text-xl">E-nvite</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="sidebar">
+        <nav class="flex flex-col">
+        <a href="landingpage.html" class="py-2 px-4 text-gray-700 hover:bg-gray-200">Home</a>
+        </nav>
+    </div>
+    <div class="main-content">
+        <form method="POST" action="">
+            <div class="container mx-auto p-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Male Section -->
+                    <div>
+                        <div class="media mb-4">
+                            <a href="javascript:void(0);" class="mr-4">
+                                <img src="../img/male.png" id="male-account-upload-img" class="rounded mr-4" alt="profile image" height="80" width="80">
+                            </a>
+                            <div class="media-body mt-4 ml-1">
+                                <label for="male-account-upload" class="btn btn-sm btn-primary mb-4 mr-4 waves-effect waves-float waves-light">
+                                    <i class="fa fa-folder-open"></i> Pilih
+                                </label>
+                                <input type="file" id="male-account-upload" hidden name="male_profile_photo" accept="image/*">
+                                <p>Ekstensi File JPG, PNG, Ukuran Maksimal File 2MB</p>
+                            </div>
+                        </div>
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="male_name">Nama Lengkap Pria <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="male_name" placeholder="Nama Lengkap..." name="male_name" required value>
+                        </div>
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="male_nickname">Nama Panggilan Pria <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="male_nickname" placeholder="Nama Panggilan..." name="male_nickname" required value>
+                        </div>
+                        <hr class="divider mb-4">
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="male_father_name">Nama Ayah Pria <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="male_father_name" placeholder="Nama Ayah..." name="male_father_name" required value>
+                        </div>
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="male_mother_name">Nama Ibu Pria <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="male_mother_name" placeholder="Nama Ibu..." name="male_mother_name" required value>
+                        </div>
+                        <hr class="divider mb-4">
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="male_family_sequence">Urutan Anak Pria <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="male_family_sequence" placeholder="Urutan Anak Pria..." name="male_family_sequence" required value>
+                        </div>
+                        <hr class="divider mb-4">
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="male_instagram">Username Instagram</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="text" class="form-control w-full border-gray-300 p-2" id="male_instagram" placeholder="Username instagram" name="male_instagram" value>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Female Section -->
+                    <div>
+                        <div class="media mb-4">
+                            <a href="javascript:void(0);" class="mr-4">
+                                <img src="../img/female.png" id="female-account-upload-img" class="rounded mr-4" alt="profile image" height="80" width="80">
+                            </a>
+                            <div class="media-body mt-4 ml-1">
+                                <label for="female-account-upload" class="btn btn-sm btn-primary mb-4 mr-4 waves-effect waves-float waves-light">
+                                    <i class="fa fa-folder-open"></i> Pilih
+                                </label>
+                                <input type="file" id="female-account-upload" hidden name="female_profile_photo" accept="image/*">
+                                <p>Ekstensi File JPG, PNG, Ukuran Maksimal File 2MB</p>
+                            </div>
+                        </div>
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="female_name">Nama Lengkap Wanita <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="female_name" placeholder="Nama Lengkap..." name="female_name" required value>
+                        </div>
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="female_nickname">Nama Panggilan Wanita <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="female_nickname" placeholder="Nama Panggilan..." name="female_nickname" required value>
+                        </div>
+                        <hr class="divider mb-4">
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="female_father_name">Nama Ayah Wanita <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="female_father_name" placeholder="Nama Ayah..." name="female_father_name" required value>
+                        </div>
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="female_mother_name">Nama Ibu Wanita <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="female_mother_name" placeholder="Nama Ibu..." name="female_mother_name" required value>
+                        </div>
+                        <hr class="divider mb-4">
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="female_family_sequence">Urutan Anak Wanita <span class="required-label text-red-500">*</span></label>
+                            <input type="text" class="form-control w-full border-gray-300 p-2" id="female_family_sequence" placeholder="Urutan Anak Wanita..." name="female_family_sequence" required value>
+                        </div>
+                        <hr class="divider mb-4">
+                        <div class="form-group form-show-validation mb-4">
+                            <label for="female_instagram">Username Instagram</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="text" class="form-control w-full border-gray-300 p-2" id="female_instagram" placeholder="Username instagram" name="female_instagram" value>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+              </div>
+        </form>
+    </div>
+</body>
+</html>
