@@ -8,7 +8,7 @@ if (isset($_POST['login'])) {
     // Sertakan file koneksi ke database
     include "../db/koneksi.php";
 
-    //escape input pengguna untuk mencegah serangan SQL injection
+    // Escape input pengguna untuk mencegah serangan SQL injection
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
 

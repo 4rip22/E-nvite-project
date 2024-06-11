@@ -35,7 +35,6 @@ if (isset($_POST['submit'])) {
     } else {
         $_SESSION['error'] = "Pengguna tidak ditemukan!";
     }
-
     header("Location: ubahpw.php");
     exit();
 }

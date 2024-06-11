@@ -143,10 +143,33 @@ $result = mysqli_query($conn, $sql);
     <div class="flex-1 flex flex-col bg-gray-300">
         <!-- Header -->
         <div class="bg-blue-900 text-white p-3 flex justify-end">
-            <div class="mr-10 font-medium text-lg flex items-center justify-center">Admin
-                <span><img src="../img/admin.ico" alt="admin" class="w-12 ml-3 p-2 bg-slate-300 rounded-full"></span>
+            <div class="relative mr-10 font-medium text-lg flex items-center justify-center">
+                Hi, Admin 🫰
+                <span class="relative">
+                    <img src="../img/admin.ico" alt="admin" id="adminIcon"
+                        class="w-12 ml-3 p-2 bg-slate-300 rounded-full cursor-pointer">
+                    <div id="dropdownMenu"
+                        class="hidden absolute -right-10 mt-3 w-40 bg-blue-900 rounded-b-lg shadow-lg z-20">
+                        <a href="profileadmin.php"
+                            class="flex items-center px-4 mx-2 my-2 py-1 text-white text-base hover:bg-red-400 rounded-xl">
+                            <i class="fa-solid fa-user-tie mr-2"></i>
+                            Profile
+                        </a>
+                        <a href="#" onclick="confirmLogout()"
+                            class="flex items-center px-4 mx-2 my-2 py-1 text-white text-base hover:bg-red-400 rounded-xl">
+                            <i class="fa-solid fa-sign-out-alt mr-2"></i>
+                            Log Out
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 mx-2 my-2 py-1 text-white text-base hover:bg-red-400 rounded-xl">
+                            <i class="fa-solid fa-comment-dots mr-2"></i>
+                            Masukan
+                        </a>
+                    </div>
+                </span>
             </div>
         </div>
+
         <!-- Content -->
         <div class="flex-col p-4 bg-white relative ">
             <h1 class="text-xl font-semibold ml-7  ">Add User</h1>
@@ -272,6 +295,23 @@ $result = mysqli_query($conn, $sql);
             // Toggle the eye icon
             this.classList.toggle('fa-eye');
             this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+
+    <script>
+        // Fungsi untuk menampilkan atau menyembunyikan dropdown menu
+        const adminIcon = document.getElementById('adminIcon');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        adminIcon.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        // Fungsi untuk menutup dropdown menu ketika mengklik di luar area dropdown
+        window.addEventListener('click', function (event) {
+            if (!adminIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
         });
     </script>
 </body>

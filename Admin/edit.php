@@ -3,6 +3,7 @@
 include "../db/koneksi.php";
 include "../Admin/session-login/ceklogin.php";
 
+//query untuk mengecek id user yg bertujuan untuk dapat dipanggil
 $id = $_GET["id"];
 $query = "SELECT * FROM user WHERE ID='$id'";
 $data = mysqli_query($conn, $query);
