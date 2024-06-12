@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,13 @@
     <!-- Kontainer utama untuk form login -->
     <div class="form-container bg-white p-8 rounded-lg shadow-md-lg w-full max-w-sm">
         <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        <!-- Error Message -->
+        <?php if (isset($_GET['error'])): ?>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline"><?php echo htmlspecialchars($_GET['error']); ?></span>
+            </div>
+        <?php endif; ?>
         <form action="set_login.php" method="POST">
             <div class="mb-4">
                 <label for="email" class="block text-gray-700">Email</label>
