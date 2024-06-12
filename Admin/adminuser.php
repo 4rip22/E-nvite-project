@@ -256,139 +256,142 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css
                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
                             <tr class="bg-white user-row">
                                 <td class="p-4 border-b>
-                                    <p class="block font-sans text-sm antialiased font-normal leading-normal ">
-                                        <?= $row["ID"] ?>
-                                    </p>
-                                </td>
-                                <td class="p-4 border-b ">
-                                    <p class="block font-sans text-sm antialiased font-normal leading-normal ">
-                                        <?= $row["Nama"] ?>
-                                    </p>
-                                </td>
-                                <td class="p-4 border-b ">
-                                    <p class="block font-sans text-sm antialiased font-normal leading-normal ">
-                                        <?= $row["Email"] ?>
-                                    </p>
-                                </td>
-                                <td class="p-4 border-b ">
-                                    <p class="block font-sans text-sm antialiased font-normal leading-normal ">
-                                        <?= $row["No Wa"] ?>
-                                    </p>
-                                </td>
-                                <td class="p-4 border-b ">
-                                    <div class="flex items-center justify-center  ">
-                                        <a href="edit.php?id=<?= $row["ID"] ?>"
-                                            class=" font-sans text-sm antialiased font-medium hover:border-b-2 hover:border-red-800 ">
-                                            Edit
-                                        </a>
-                                        <a href="edit.php?id=<?= $row["ID"] ?>" class="pt-[0.3rem] hover:text-blue-500">
-                                            <i class='bx bxs-edit text-2xl '></i>
-                                        </a>
-                                        <a href="javascript:void(0)" onclick="confirmDelete(<?= $row['ID'] ?>)"
-                                            class="pt-[0.3rem] ml-5 hover:text-red-500">
-                                            <i class='bx bxs-trash text-2xl'></i>
-                                        </a>
+                                    <p class=" block font-sans text-sm antialiased font-normal leading-normal ">
+                                                                <?= $row["ID"] ?>
+                                                            </p>
+                                                        </td>
+                                                        <td class=" p-4 border-b ">
+                                                            <p class=" block font-sans text-sm antialiased font-normal
+                            leading-normal ">
+                                                                <?= $row["Nama"] ?>
+                                                            </p>
+                                                        </td>
+                                                        <td class=" p-4 border-b ">
+                                                            <p class=" block font-sans text-sm antialiased font-normal
+                            leading-normal ">
+                                                                <?= $row["Email"] ?>
+                                                            </p>
+                                                        </td>
+                                                        <td class=" p-4 border-b ">
+                                                            <p class=" block font-sans text-sm antialiased font-normal
+                            leading-normal ">
+                                                                <?= $row["Nomor"] ?>
+                                                            </p>
+                                                        </td>
+                                                        <td class=" p-4 border-b ">
+                                                            <div class=" flex items-center justify-center ">
+                                                                <a href=" edit.php?id=<?= $row["ID"] ?>"
+                                    class=" font-sans text-sm antialiased font-medium hover:border-b-2 hover:border-red-800 ">
+                                    Edit
+                                    </a>
+                                    <a href="edit.php?id=<?= $row["ID"] ?>" class="pt-[0.3rem] hover:text-blue-500">
+                                        <i class='bx bxs-edit text-2xl '></i>
+                                    </a>
+                                    <a href="javascript:void(0)" onclick="confirmDelete(<?= $row['ID'] ?>)"
+                                        class="pt-[0.3rem] ml-5 hover:text-red-500">
+                                        <i class='bx bxs-trash text-2xl'></i>
+                                    </a>
 
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                </div>
+                </td>
+                </tr>
+            <?php endwhile; ?>
+        <?php endif; ?>
+        </tbody>
+        </table>
+    </div>
 
-        <script src="
+    <script src="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js
 "></script>
-        <script>
-            // Fungsi untuk menampilkan pesan konfirmasi saat logout
-            function confirmLogout() {
-                Swal.fire({
-                    title: 'Konfirmasi Keluar',
-                    text: 'Apakah Anda yakin ingin keluar?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Keluar',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirect ke halaman logout jika pengguna menekan "Logout"
-                        window.location.href = '../Admin/logoutadmin.php';
-                    }
-                });
-            }
-        </script>
-
-        <script>
-            // fungsi delete confirm
-            function confirmDelete(id) {
-                Swal.fire({
-                    title: "Apakah Anda yakin?",
-                    text: "Anda tidak akan dapat mengembalikan ini!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, Hapus"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Terhapus!",
-                            text: "Data sudah terhapus!.",
-                            icon: "success"
-                        });
-                        setTimeout(function () {
-                            window.location.href = '../Admin/delete.php?id=' + id;
-                        }, 7000);
-                    }
-                });
-            }
-        </script>
-
-        <script>
-            // Fungsi pencarian
-            const searchInput = document.getElementById('searchInput');
-            const searchIcon = document.getElementById('searchIcon');
-            const rows = document.querySelectorAll('.user-row');
-
-            function searchRows() {
-                const query = searchInput.value.toLowerCase();
-                rows.forEach(row => {
-                    const nama = row.querySelector('td:nth-child(2) p').textContent.toLowerCase();
-                    const email = row.querySelector('td:nth-child(3) p').textContent.toLowerCase();
-                    const noWa = row.querySelector('td:nth-child(4) p').textContent.toLowerCase();
-
-                    if (nama.includes(query) || email.includes(query) || noWa.includes(query)) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            }
-
-            searchInput.addEventListener('input', searchRows);
-            searchIcon.addEventListener('click', searchRows);
-        </script>
-
-        <script>
-            //Fungsi untuk menampilkan atau menyembunyikan dropdown menu
-            const adminIcon = document.getElementById('adminIcon');
-            const dropdownMenu = document.getElementById('dropdownMenu');
-
-            adminIcon.addEventListener('click', () => {
-                dropdownMenu.classList.toggle('hidden');
-            });
-
-            //Fungsi untuk menutup dropdown menu ketika mengklik di luar area dropdown
-            window.addEventListener('click', function (event) {
-                if (!adminIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.classList.add('hidden');
+    <script>
+        // Fungsi untuk menampilkan pesan konfirmasi saat logout
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Konfirmasi Keluar',
+                text: 'Apakah Anda yakin ingin keluar?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Keluar',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke halaman logout jika pengguna menekan "Logout"
+                    window.location.href = '../Admin/logoutadmin.php';
                 }
             });
-        </script>
+        }
+    </script>
+
+    <script>
+        // fungsi delete confirm
+        function confirmDelete(id) {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Hapus"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Terhapus!",
+                        text: "Data sudah terhapus!.",
+                        icon: "success"
+                    });
+                    setTimeout(function () {
+                        window.location.href = '../Admin/delete.php?id=' + id;
+                    }, 3000);
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // Fungsi pencarian
+        const searchInput = document.getElementById('searchInput');
+        const searchIcon = document.getElementById('searchIcon');
+        const rows = document.querySelectorAll('.user-row');
+
+        function searchRows() {
+            const query = searchInput.value.toLowerCase();
+            rows.forEach(row => {
+                const nama = row.querySelector('td:nth-child(2) p').textContent.toLowerCase();
+                const email = row.querySelector('td:nth-child(3) p').textContent.toLowerCase();
+                const noWa = row.querySelector('td:nth-child(4) p').textContent.toLowerCase();
+
+                if (nama.includes(query) || email.includes(query) || noWa.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        searchInput.addEventListener('input', searchRows);
+        searchIcon.addEventListener('click', searchRows);
+    </script>
+
+    <script>
+        //Fungsi untuk menampilkan atau menyembunyikan dropdown menu
+        const adminIcon = document.getElementById('adminIcon');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        adminIcon.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        //Fungsi untuk menutup dropdown menu ketika mengklik di luar area dropdown
+        window.addEventListener('click', function (event) {
+            if (!adminIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    </script>
 
 </body>
 

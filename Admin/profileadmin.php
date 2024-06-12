@@ -10,12 +10,16 @@ if (isset($_SESSION['ID'])) {
     $admin_nama = $_SESSION['nama'];
     $admin_email = $_SESSION['email'];
     $admin_pass = $_SESSION['pw'];
+    $login_time = $_SESSION['login_time']; // Ambil waktu login dari sesi
+
 
 } else {
     // Redirect ke halaman login jika sesi tidak ditemukan
     header("Location: loginadmin.php");
     exit();
 }
+
+
 
 ?>
 
@@ -218,6 +222,7 @@ if (isset($_SESSION['ID'])) {
                 <p class="text-gray-600"><?= $admin_id ?></p>
                 <p class="text-gray-600"><?= $admin_email ?></p>
                 <p class="text-gray-600"><?= $admin_pass ?></p>
+                <p class="text-gray-600">Login Time: <?= $login_time ?></p> <!-- Tampilkan waktu login -->
             </div>
             <a href="ubahpw.php">
                 <button type="button"

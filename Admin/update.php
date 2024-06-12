@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
     $email = htmlspecialchars($_POST["email"]);
     $no_wa = htmlspecialchars($_POST["no_wa"]);
 
-    $sql = "UPDATE user SET Nama='$nama', Email='$email', `No Wa`='$no_wa' WHERE ID='$id'";
+    $sql = "UPDATE user SET Nama='$nama', Email='$email', `Nomor`='$no_wa' WHERE ID='$id'";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

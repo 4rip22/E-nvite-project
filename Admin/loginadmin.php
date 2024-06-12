@@ -27,6 +27,7 @@ if (isset($_POST['login'])) {
         $_SESSION['nama'] = $row['Nama'];
         $_SESSION['email'] = $row['Email'];
         $_SESSION['pw'] = $row['Password'];
+        $_SESSION['login_time'] = date("Y-m-d H:i:s"); // Simpan waktu login
 
         // Redirect ke halaman setelah login
         header("Location: adminlogin.php");
@@ -36,6 +37,8 @@ if (isset($_POST['login'])) {
         $error = "Email dan Password tidak tersedia!";
     }
 }
+
+
 
 
 ?>

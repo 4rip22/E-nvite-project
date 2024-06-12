@@ -10,7 +10,7 @@ if (isset($_POST["submit"])) {
     $no_wa = htmlspecialchars($_POST["no_wa"]);
 
 
-    $sql = "INSERT INTO user (Nama, Email, Password, `No Wa`) VALUES ('$nama','$email', '$password', '$no_wa')";
+    $sql = "INSERT INTO user (Nama, Email, Password, `Nomor`) VALUES ('$nama','$email', '$password', '$no_wa')";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
