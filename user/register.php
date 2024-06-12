@@ -1,24 +1,33 @@
 <?php
-  // Include database connection
-  include '../db/koneksi.php';
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "envite";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $Nama = $_POST['nama'];
-    $Email = $_POST['email'];
-    $Password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
-    $Nomor = $_POST['nomor'];
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Insert data into database
-    $sql = "INSERT INTO user (nama, email, password, nomor) VALUES ('$Nama', '$Email', '$Password', '$Nomor')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-        header("Location: loginUser.php");
-        exit();
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    $conn->close();
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+// Collect and sanitize input data
+$nama = mysqli_real_escape_string($conn, $_POST['nama']);
+$email = mysqli_real_escape_string($conn, $_POST['email']);
+$password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash the password
+$nomor = mysqli_real_escape_string($conn, $_POST['nomor']);
+
+// Insert user data into the database
+$sql = "INSERT INTO user (nama, email, password, nomor) VALUES ('$nama', '$email', '$password', '$nomor')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Registration successful!";
+    // Redirect to login page or another page
+    header("Location: loginUser.php");
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
 ?>
