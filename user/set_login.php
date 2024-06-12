@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
         session_start();
         $_SESSION['user_id'] = $row['ID'];
         echo "Login successful!";
-        header("Location: homepage.html");
+        header("Location: homepage.php");
         exit();
     } else {
         // Password is incorrect

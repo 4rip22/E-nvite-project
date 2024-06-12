@@ -255,7 +255,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css
                     <?php if (mysqli_num_rows($result) > 0): ?>
                         <?php while ($row = mysqli_fetch_assoc($result)): ?>
                             <tr class="bg-white user-row">
-                                <td class="p-4 border-b">
+                                <td class="p-4 border-b>
                                     <p class="block font-sans text-sm antialiased font-normal leading-normal ">
                                         <?= $row["ID"] ?>
                                     </p>

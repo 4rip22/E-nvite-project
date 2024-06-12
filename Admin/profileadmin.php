@@ -2,8 +2,8 @@
 session_start();
 include "../db/koneksi.php";
 
-$sql = "SELECT * FROM admin";
-$result = mysqli_query($conn, $sql);
+// $sql = "SELECT * FROM admin";
+// $result = mysqli_query($conn, $sql);
 
 if (isset($_SESSION['ID'])) {
     $admin_id = $_SESSION['ID'];
@@ -265,4 +265,5 @@ if (isset($_SESSION['ID'])) {
         }
     </script>
 </body>
+
 </html>

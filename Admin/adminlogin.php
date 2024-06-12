@@ -201,7 +201,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css
                 <!-- Card Total User -->
                 <div class="bg-white p-8 rounded-lg shadow-lg">
                     <h2 class="text-lg font-semibold mb-2 text-left">Total User</h2>
-                    <p class="text-xl font-bold"><?php echo $total_user; ?></p>
+                    <p class="text-xl font-bold"><?php echo $total_user;?></p>
                 </div>
 
                 <!-- Card Total Pesanan -->

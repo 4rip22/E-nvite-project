@@ -259,8 +259,6 @@ $result = mysqli_query($conn, $sql);
                 </a>
             </div>
         </div>
-
-
         <?php
         unset($_SESSION["berhasil_update_data"]);
     endif; ?>
