@@ -3,9 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2024 at 02:49 AM
+-- Generation Time: Jun 12, 2024 at 05:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -98,11 +99,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `Nama`, `Email`, `Password`, `Nomor`) VALUES
-(33, '', '', '', ''),
-(34, '', '', '', ''),
-(35, 'aripindosia12', 'aripp@gmail.com', 'aripindosia12', '9045'),
-(36, 'oktavia', 'oktavia@gmail.com', '$2y$10$nF9k6ME/JxZ4Whj3TkQsuOewR3ePH.e/L7fwgG3yaF/', '09506'),
-(37, 'rafiff234', 'rafiff234@gmail.com', '$2y$10$m4Pgahh3guHdL6mcnsdCOO37idLwjvYsU./y40lkWMx', '0968');
+(38, 'rafiff2345', 'rafif2345@gmail.com', '$2y$10$vz37XRtwXbb2LEc.lxAGaOIIeN4EBkpZVsQq/Th66uc', '09877'),
+(39, 'aksan1234', 'aksan123@gmail.com', 'aksan1234', '08');
 
 --
 -- Indexes for dumped tables
@@ -159,7 +157,7 @@ ALTER TABLE `pesanan`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
