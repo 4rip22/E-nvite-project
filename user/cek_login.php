@@ -1,28 +1,40 @@
 <?php
-    session_start();
-    include '../db/koneksi.php';
+session_start();
+include '../db/koneksi.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $Email = $_POST['email'];
-        $Password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $Email = $_POST['email'];
+    $Password = $_POST['password'];
 
-        $sql = "SELECT * FROM user WHERE email='$Email'";
-        $result = $conn->query($sql);
+    // Menggunakan prepared statements untuk keamanan
+    $stmt = $conn->prepare("SELECT * FROM user WHERE email = ?");
+    $stmt->bind_param("s", $Email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            if (password_verify($Password, $row['password'])) {
-                $_SESSION['nama'] = $row['nama'];
-                $_SESSION['email'] = $row['email'];
-                header("Location: landingpage.html");
-                exit();
-            } else {
-                echo "Invalid password.";
-            }
+    if ($result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+        
+        // Verifikasi password
+        if (password_verify($Password, $data['password'])) {
+            $_SESSION['email'] = $data['email']; // Store email
+            $_SESSION['nama'] = $data['nama']; // Store nama
+
+            header("Location: landingpage.html");
+            exit();
         } else {
-            echo "No user found with that email.";
+            $error_message = "Password salah.";
+            echo $error_message;
         }
-
-        $conn->close();
+    } else {
+        $error_message = "Email atau password salah.";
+        echo $error_message;
     }
-    ?>
+
+    $stmt->close();
+    $conn->close();
+} else {
+    header("Location: loginUser.php");
+    exit();
+}
+?>
