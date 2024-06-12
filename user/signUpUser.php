@@ -49,7 +49,9 @@
             </div>
             <button type="submit" class="w-full bg-purple-800 text-bold text-white py-2 rounded-lg border border-transparent transition-all hover:bg-white hover:text-purple-800 hover:border-purple-800 hover:text-bold">Next</button>
         </form>
+        <a class="block text-center mt-4 text-blue-500 text-bold" href="../user/loginUser.php">Login</a>
     </div>
+    <a class="block text-center mt-4 text-blue-500 text-bold" href="../user/loginUser.php">Login</a>
     <script>
         function texttonumber(evt) {
             var charcode = (evt.which) ? evt.which : event.keyCode
